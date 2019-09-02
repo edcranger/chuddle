@@ -31,27 +31,29 @@
         </h1>
         <v-card class="mx-auto">
           <div class="messagesBox" v-chat-scroll>
-            <v-list three-line>
-              <template v-for="(item) in this.$store.getters.getMessage">
-                <v-list-item :key="item['.key']">
-                  <v-list-item-avatar>
-                    <v-img :src="item.from.avatar"></v-img>
-                  </v-list-item-avatar>
-
-                  <v-list-item-content>
-                    <v-list-item-subtitle>
-                      <strong class="green--text">{{item.from.name}}:</strong>
+            <v-container fluid>
+              <div
+                class="mt-3"
+                v-for="(item) in this.$store.getters.getMessage"
+                :key="item['.key']"
+              >
+                <v-row>
+                  <v-col cols="2">
+                    <v-avatar>
+                      <v-img height="30" :src="item.from.avatar" contain></v-img>
+                    </v-avatar>
+                  </v-col>
+                  <v-col cols="8">
+                    <div class="sender blue pa-4 white--text mt-5">
                       {{item.message}}
-                    </v-list-item-subtitle>
-                    <v-list-item-subtitle>
-                      <div class="messageTime">
+                      <p>
                         <span class="chatTime">{{ item.time | moment("from", "now") }}</span>
-                      </div>
-                    </v-list-item-subtitle>
-                  </v-list-item-content>
-                </v-list-item>
-              </template>
-            </v-list>
+                      </p>
+                    </div>
+                  </v-col>
+                </v-row>
+              </div>
+            </v-container>
           </div>
 
           <v-card-actions>
@@ -83,43 +85,43 @@ export default {
   data() {
     return {
       date: moment().format("MM-D-YYYY"),
-      messages: [],
-      items: [
-        {
-          avatar: "https://cdn.vuetifyjs.com/images/lists/1.jpg",
-          title: "Brunch this weekend?",
-          subtitle:
-            "<span class='text--primary'>Ali Connors</span> &mdash; I'll be in your neighborhood doing errands this weekend. Do you want to hang out?"
-        },
+      messages: []
+      // items: [
+      //   {
+      //     avatar: "https://cdn.vuetifyjs.com/images/lists/1.jpg",
+      //     title: "Brunch this weekend?",
+      //     subtitle:
+      //       "<span class='text--primary'>Ali Connors</span> &mdash; I'll be in your neighborhood doing errands this weekend. Do you want to hang out?"
+      //   },
 
-        {
-          avatar: "https://cdn.vuetifyjs.com/images/lists/2.jpg",
-          title: 'Summer BBQ <span class="grey--text text--lighten-1">4</span>',
-          subtitle:
-            "<span class='text--primary'>to Alex, Scott, Jennifer</span> &mdash; Wish I could come, but I'm out of town this weekend."
-        },
+      //   {
+      //     avatar: "https://cdn.vuetifyjs.com/images/lists/2.jpg",
+      //     title: 'Summer BBQ <span class="grey--text text--lighten-1">4</span>',
+      //     subtitle:
+      //       "<span class='text--primary'>to Alex, Scott, Jennifer</span> &mdash; Wish I could come, but I'm out of town this weekend."
+      //   },
 
-        {
-          avatar: "https://cdn.vuetifyjs.com/images/lists/3.jpg",
-          title: "Oui oui",
-          subtitle:
-            "<span class='text--primary'>Sandra Adams</span> &mdash; Do you have Paris recommendations? Have you ever been?"
-        },
+      //   {
+      //     avatar: "https://cdn.vuetifyjs.com/images/lists/3.jpg",
+      //     title: "Oui oui",
+      //     subtitle:
+      //       "<span class='text--primary'>Sandra Adams</span> &mdash; Do you have Paris recommendations? Have you ever been?"
+      //   },
 
-        {
-          avatar: "https://cdn.vuetifyjs.com/images/lists/4.jpg",
-          title: "Birthday gift",
-          subtitle:
-            "<span class='text--primary'>Trevor Hansen</span> &mdash; Have any ideas about what we should get Heidi for her birthday?"
-        },
+      //   {
+      //     avatar: "https://cdn.vuetifyjs.com/images/lists/4.jpg",
+      //     title: "Birthday gift",
+      //     subtitle:
+      //       "<span class='text--primary'>Trevor Hansen</span> &mdash; Have any ideas about what we should get Heidi for her birthday?"
+      //   },
 
-        {
-          avatar: "https://cdn.vuetifyjs.com/images/lists/5.jpg",
-          title: "Recipe to try",
-          subtitle:
-            "<span class='text--primary'>Britta Holt</span> &mdash; We should eat this: Grate, Squash, Corn, and tomatillo Tacos."
-        }
-      ]
+      //   {
+      //     avatar: "https://cdn.vuetifyjs.com/images/lists/5.jpg",
+      //     title: "Recipe to try",
+      //     subtitle:
+      //       "<span class='text--primary'>Britta Holt</span> &mdash; We should eat this: Grate, Squash, Corn, and tomatillo Tacos."
+      //   }
+      // ]
     };
   },
   created() {}
@@ -127,6 +129,11 @@ export default {
 </script >
 
 <style scoped>
+.sender {
+  border-radius: 5px 50px 50px;
+  font-size: 0.8em;
+}
+
 .messageTime {
   margin-top: -2px;
 }
@@ -134,7 +141,7 @@ export default {
   font-size: 0.8em;
 }
 .messagesBox {
-  max-height: 370px;
+  max-height: 300px;
   overflow: auto;
 }
 
